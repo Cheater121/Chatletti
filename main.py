@@ -2,14 +2,11 @@ from flask import Flask, request
 
 app = Flask(__name__)
 list_of_messages = []
-list_of_messages.append({"Username": "Test",
-                         "Messagetext": "test",
-                         "Timestamp": "2022-06-05S16:23:10.1123456"})
 
 
 @app.route("/")
-def hello_world():
-    return "Hello World!"
+def start_page():
+    return "<h1>Test server is running!</h1>"
 
 
 # checking status (how many messages received)
@@ -28,7 +25,7 @@ def sendmessage():
     list_of_messages.append(msg)
     msg_text = f"{msg['Username']} <{msg['Timestamp']}>: {msg['Messagetext']}"
     print(f"Total messages: {len(list_of_messages)} Last received message: {msg_text}")
-    return f"Success! Total messages: {len(list_of_messages)}", 200
+    return f"Success! Received messages: 1. Total messages on server: {len(list_of_messages)}", 200
 
 
 @app.route("/api/messenger/<int:i>")
