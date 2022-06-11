@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Page Title</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="header__title">Chatletti</h1>
+  </header>
+  <article class="article article_whitebg article_first">
+    <h2 class="black">Привет! Это черновой вариант<br>стартовой страницы!</h2>
+    <p class="black">Тут будет официальная страница мессенджера <strong>Chatletti</strong>,
+    но это не точно...Потом надо будет сделать адаптивную верстку сайта, клиент для приложения Android, iOS, работы много в общем!</p>
+    <p class="black"><strong>Почему Chatletti?</strong></p>
+    <p class="black"><ul>
+      <li>Это чат (в перспективе защищенный)</li>
+      <li>Похоже на котлетти (может быть это итальянские котлеты?)</li>
+      <li>Разработка началась ЛЕТом</li>
+      <li>Если попереставлять буковки, то там можно найти слова Chat и Lite :)</li>
+      <li>В конце концов "letti" - это кровать (итал.), так что это чат для <strong>самых</strong> близких ;)</li>
+    </ul></p>
+  </article>
+  <article class="article article_bluebg article_second">
+    <h2 class="white">Свяжись со мной!</h2>
+    <p class="white">Чтобы тебе не было скучно, можешь потыкать на кнопочки!</p>
+    <form class="form">
+      <input type="email" class="form_input" placeholder="E-mail">
+      <input type="text" class="form_input" placeholder="Имя">
+      <textarea class="form_textarea" placeholder="Ваше сообщение"></textarea>
+      <button class="form_button" type="button" onclick="gotit()">Отправить</button>
+        <script>
+          function gotit() {
+            alert("Попался! А оно не работает...")
+            }
+        </script>
+    </form>
+  </article>
+</body>
+</html>

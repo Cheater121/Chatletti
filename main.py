@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 list_of_messages = []
@@ -6,7 +6,7 @@ list_of_messages = []
 
 @app.route("/")
 def start_page():
-    return "<h1>Test server is running!</h1>"
+    return render_template('index.html')
 
 
 # sending messages to server
@@ -14,10 +14,10 @@ def start_page():
 def sendmessage():
     msg = request.json
     if (len(msg)) == 3 and "Username" in msg.keys() and "Timestamp" in msg.keys() and "Messagetext" in msg:
-    	list_of_messages.append(msg)
-    	return "Success! Received messages: 1.", 200
+        list_of_messages.append(msg)
+        return "Success! Received messages: 1.", 200
     else:
-    	return "Wrong format", 200
+        return "Wrong format", 200
 
 
 @app.route("/api/messenger/<int:i>")
