@@ -37,7 +37,7 @@ def getmessage(username):
         elif len(dict_of_messages[username]) == 0:
             return "Not found", 200
     except KeyError:
-        return "Not found", 200
+        return "Not found user", 400
 
 
 if __name__ == '__main__':
