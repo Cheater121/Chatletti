@@ -1,7 +1,8 @@
 from flask import Flask, request, render_template, url_for
+from tests import msg_validator
 
 app = Flask(__name__)
-list_of_messages = []
+dict_of_messages = {}
 
 
 @app.route("/")
@@ -13,18 +14,29 @@ def start_page():
 @app.route("/api/messenger", methods=['POST'])
 def sendmessage():
     msg = request.json
-    if (len(msg)) == 3 and "Username" in msg.keys() and "Timestamp" in msg.keys() and "Messagetext" in msg:
-        list_of_messages.append(msg)
+    flag = msg_validator(msg)
+    if flag is True:
+        recipient = msg.pop("Recipient")
+        if recipient not in dict_of_messages:
+            dict_of_messages[recipient] = [msg]
+        else:
+            dict_of_messages[recipient].append(msg)
         return "Success! Received messages: 1.", 200
     else:
-        return "Wrong format", 200
+        return "Wrong format", 400
 
 
-@app.route("/api/messenger/<int:i>")
-def getmessage(i):
-    if 0 <= i < len(list_of_messages):
-        return list_of_messages[i], 200
-    else:
+@app.route("/api/messenger/<username>")
+def getmessage(username):
+    try:
+        if len(dict_of_messages[username]) > 0:
+            messages = dict_of_messages.get(username)
+            answer = {username: messages}
+            dict_of_messages[username] = []
+            return answer, 200
+        elif len(dict_of_messages[username]) == 0:
+            return "Not found", 200
+    except KeyError:
         return "Not found", 200
 
 
