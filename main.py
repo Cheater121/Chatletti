@@ -10,9 +10,9 @@ def start_page():
     return render_template('index.html')
 
 
-# sending messages to server
+# getting messages by server from user
 @app.route("/api/messenger", methods=['POST'])
-def sendmessage():
+def getmessage():
     msg = request.json
     flag = msg_validator(msg)
     if flag is True:
@@ -26,8 +26,9 @@ def sendmessage():
         return "Wrong format", 400
 
 
+# sending messages to user from server
 @app.route("/api/messenger/<username>")
-def getmessage(username):
+def sendmessage(username):
     try:
         if len(dict_of_messages[username]) > 0:
             messages = dict_of_messages.get(username)
