@@ -14,8 +14,7 @@ def start_page():
 @app.route("/api/messenger", methods=['POST'])
 def getmessage():
     msg = request.json
-    flag = msg_validator(msg)
-    if flag is True:
+    if msg_validator(msg):
         recipient = msg.pop("Recipient")
         if recipient not in dict_of_messages:
             dict_of_messages[recipient] = [msg]
